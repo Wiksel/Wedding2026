@@ -1,0 +1,36 @@
+.btn {
+    padding: 12px 32px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border-radius: 4px;
+    /* Slight rounding, or 0 for sharp */
+}
+
+.btn-primary {
+    background-color: var(--color-ivory-silk);
+    color: var(--color-antique-gold);
+    border-color: var(--color-antique-gold);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-antique-gold);
+    color: var(--color-ivory-silk);
+    box-shadow: var(--shadow-gold);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--color-deep-forest);
+    border-color: var(--color-deep-forest);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-deep-forest);
+    color: var(--color-ivory-silk);
+}

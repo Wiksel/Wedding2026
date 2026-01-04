@@ -1,0 +1,32 @@
+.story-section {
+    padding: 80px 20px;
+    text-align: center;
+    /* Top border effect (Fabric draps simulation later) */
+    position: relative;
+    z-index: 5;
+}
+
+.story-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.story-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-antique-gold);
+}
+
+.story-text {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--color-deep-forest);
+    line-height: 1.9;
+}
+
+.story-signature {
+    font-family: var(--font-accent);
+    font-size: 3rem;
+    margin-top: 2rem;
+    color: var(--color-sage-leaf);
+}

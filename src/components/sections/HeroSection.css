@@ -1,0 +1,92 @@
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.logo-text {
+    font-family: var(--font-accent);
+    font-size: 2rem;
+    color: var(--color-antique-gold);
+    margin-top: 20px;
+}
+
+.hero-content {
+    text-align: center;
+    z-index: 10;
+}
+
+.main-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: 0;
+    color: var(--color-deep-forest);
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: var(--color-sage-leaf);
+    margin-top: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.floral-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    /* Or contain depending on image */
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    /* Subtle background */
+    z-index: 0;
+    pointer-events: none;
+    filter: sepia(0.3);
+    /* Warm tone */
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fairy-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-antique-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--color-antique-gold);
+    animation: pulse-drop 2s infinite ease-in-out;
+}
+
+@keyframes pulse-drop {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.4;
+        box-shadow: 0 0 20px var(--color-antique-gold);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
