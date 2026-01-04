@@ -2,14 +2,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
+@source "../src";
+@plugin "tailwindcss-animate";
+
+@theme {
+    --font-script: "Dancing Script", cursive;
+    --font-serif: "Playfair Display", serif;
+    --font-sans: "Inter", sans-serif;
+
+    --animate-pulse-slow: pulse-slow 20s ease-in-out infinite;
+
+    @keyframes pulse-slow {
+
+        0%,
+        100% {
+            transform: scale(1);
+            opacity: 0.9;
+        }
+
+        50% {
+            transform: scale(1.03);
+            opacity: 1;
+        }
+    }
+}
+
 @layer base {
-  body {
-    @apply bg-[#fcfaf7] text-slate-900 font-sans selection:bg-emerald-50;
-  }
+    body {
+        @apply bg-[#fcfaf7] text-slate-900 font-sans selection:bg-emerald-50;
+    }
 }
 
 @layer utilities {
-  .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-white/30;
-  }
+    .glass-card {
+        @apply bg-white/70 backdrop-blur-md border border-white/30;
+    }
 }

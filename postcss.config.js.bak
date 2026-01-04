@@ -1,0 +1,6 @@
+// HMR Trigger 2
+export default {
+    plugins: {
+        '@tailwindcss/postcss': {},
+    },
+}

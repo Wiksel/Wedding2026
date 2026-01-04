@@ -31,17 +31,19 @@ export const HeroSection = () => {
             </div>
 
             <div className="relative text-center text-white px-4 pt-24 max-w-5xl space-y-6">
-                <p className="font-script text-3xl md:text-5xl text-emerald-100 animate-in fade-in duration-1000 mb-4 drop-shadow-lg">Na zawsze zaczyna się dzisiaj</p>
-                <h1 className="text-6xl md:text-[9rem] lg:text-[11rem] font-serif italic leading-none animate-in slide-in-from-bottom duration-1000 tracking-tight drop-shadow-2xl">
-                    Wiktoria <span className="text-4xl md:text-7xl block md:inline font-script align-middle mx-6">&</span> Bartek
+                <p className="font-script text-2xl md:text-5xl text-emerald-100 animate-in fade-in duration-1000 mb-2 md:mb-4 drop-shadow-lg">Na zawsze zaczyna się dzisiaj</p>
+                <h1 className="text-5xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-serif italic leading-none animate-in slide-in-from-bottom duration-1000 tracking-tight drop-shadow-2xl">
+                    Wiktoria <span className="text-3xl md:text-7xl block md:inline font-script align-middle my-2 md:my-0 mx-0 md:mx-6">&</span> Bartek
                 </h1>
-                <div className="flex items-center justify-center space-x-6 animate-in fade-in duration-1000 delay-300">
-                    <div className="h-px w-16 bg-white/40"></div>
-                    <p className="text-lg md:text-3xl font-light tracking-[0.5em] uppercase drop-shadow-md">02.10.2026 • Kroczewo</p>
-                    <div className="h-px w-16 bg-white/40"></div>
+                <div className="flex items-center justify-center space-x-3 md:space-x-6 animate-in fade-in duration-1000 delay-300">
+                    <div className="h-px w-8 md:w-16 bg-white/40"></div>
+                    <p className="text-sm md:text-3xl font-light tracking-[0.3em] md:tracking-[0.5em] uppercase drop-shadow-md">02.10.2026 • Kroczewo</p>
+                    <div className="h-px w-8 md:w-16 bg-white/40"></div>
                 </div>
 
-                <Countdown targetDate="2026-10-02T16:00:00" />
+                <div className="mt-8 md:mt-12">
+                    <Countdown targetDate="2026-10-02T16:00:00" />
+                </div>
             </div>
 
             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer opacity-60 hover:opacity-100 transition-opacity" onClick={scrollToHarmonogram}>
