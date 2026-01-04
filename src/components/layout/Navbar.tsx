@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+
+export const Navbar = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 50);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80;
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            setIsMenuOpen(false);
+        }
+    };
+
+    const navItems = ['Harmonogram', 'Galeria', 'Lokalizacja', 'RSVP'];
+
+    return (
+        <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-8'}`}>
+            <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
+                <div
+                    className={`text-3xl font-script tracking-wider cursor-pointer transition-colors ${scrolled ? 'text-slate-800' : 'text-white drop-shadow-md'}`}
+                    onClick={() => scrollToSection('hero')}
+                >
+                    Wiktoria & Bartek
+                </div>
+
+                <div className={`hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${scrolled ? 'text-slate-600' : 'text-white/90 drop-shadow-md'}`}>
+                    {navItems.map((item) => (
+                        <button
+                            key={item}
+                            onClick={() => scrollToSection(item.toLowerCase())}
+                            className="hover:text-emerald-500 transition-colors relative group"
+                        >
+                            {item}
+                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-emerald-500 transition-all group-hover:w-full"></span>
+                        </button>
+                    ))}
+                </div>
+
+                <button className={`md:hidden p-2 ${scrolled ? 'text-slate-800' : 'text-white'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                </button>
+            </div>
+
+            {/* Mobile Menu Overlay */}
+            {isMenuOpen && (
+                <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-t border-slate-100 py-4 shadow-xl animate-in slide-in-from-top-5">
+                    <div className="flex flex-col space-y-4 px-8">
+                        {navItems.map((item) => (
+                            <button
+                                key={item}
+                                onClick={() => scrollToSection(item.toLowerCase())}
+                                className="text-left text-sm uppercase tracking-widest font-bold text-slate-800 hover:text-emerald-600 py-2"
+                            >
+                                {item}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </nav>
+    );
+};

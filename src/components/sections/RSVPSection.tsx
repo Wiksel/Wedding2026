@@ -1,145 +1,74 @@
+import { useState } from 'react';
+import { Heart, CheckCircle2 } from 'lucide-react';
 
-import React, { useState } from 'react';
-import './RSVPSection.css';
-import { Button } from '../ui/Button';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
-
-export const RSVPSection: React.FC = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        attendance: 'yes',
-        diet: 'standard',
-        allergies: '',
-        hasPlusOne: false,
-        plusOneName: '',
-        plusOneDiet: 'standard'
-    });
-
-    const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState('');
-    const revealRef = useScrollReveal();
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
-        // Handle checkbox separately if needed, but here simple values
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
-
-    const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData(prev => ({ ...prev, [e.target.name]: e.target.checked }));
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!formData.name.trim()) {
-            setError('Prosimy o podanie imienia.');
-            return;
-        }
-        setError('');
-        // Mock API call
-        console.log('Form Submitted:', formData);
-        setSubmitted(true);
-    };
-
-    if (submitted) {
-        return (
-            <section className="rsvp-section" id="rsvp">
-                <div className="rsvp-success reveal-hidden" ref={revealRef}>
-                    <svg className="flower-icon" viewBox="0 0 24 24" width="60" height="60">
-                        <path fill="var(--color-antique-gold)" d="M12 2C9 7 4 9 4 14C4 18.4 7.6 22 12 22C16.4 22 20 18.4 20 14C20 9 15 7 12 2Z" />
-                    </svg>
-                    <h2>Dziękujemy!</h2>
-                    <p>Twoje zgłoszenie zostało zapisane.</p>
-                </div>
-            </section>
-        );
-    }
+export const RSVPSection = () => {
+    const [rsvpStatus, setRsvpStatus] = useState<'idle' | 'loading' | 'success'>('idle');
 
     return (
-        <section className="rsvp-section" id="rsvp">
-            <div className="rsvp-container reveal-hidden" ref={revealRef}>
-                <h2 className="section-title">Potwierdź Obecność</h2>
+        <section id="rsvp" className="py-32 bg-slate-950 text-white relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+                <div className="absolute top-10 left-10 text-[18rem] font-serif italic select-none">W</div>
+                <div className="absolute bottom-10 right-10 text-[18rem] font-serif italic select-none">B</div>
+            </div>
 
-                <form className="rsvp-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="name">Imię i Nazwisko</label>
+            <div className="max-w-3xl mx-auto px-6 relative z-10">
+                <div className="text-center mb-16 space-y-6">
+                    <p className="font-script text-4xl text-emerald-400">Będziesz z nami?</p>
+                    <h2 className="text-5xl md:text-7xl font-serif italic">Potwierdź obecność</h2>
+                    <div className="h-px w-20 bg-white/20 mx-auto my-6"></div>
+                    <p className="text-slate-500 tracking-[0.4em] text-[10px] uppercase font-bold">Prosimy o informację do 15 sierpnia 2026</p>
+                </div>
+
+                <form className="space-y-12" onSubmit={(e) => {
+                    e.preventDefault();
+                    setRsvpStatus('loading');
+                    setTimeout(() => setRsvpStatus('success'), 2000);
+                }}>
+                    <div className="space-y-4">
+                        <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500/80">Imię i Nazwisko</label>
                         <input
                             type="text"
-                            id="name"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className={error ? 'error' : ''}
-                            placeholder="Jan Kowalski"
+                            required
+                            className="w-full bg-white/5 border-b border-white/10 p-5 focus:border-emerald-400 outline-none transition-all placeholder:text-white/5 text-2xl font-light"
+                            placeholder="Np. Wiktoria i Bartek"
                         />
-                        {error && <span className="error-msg">{error}</span>}
                     </div>
 
-                    <div className="form-group radio-group">
-                        <span className="label">Czy będziesz z nami?</span>
-                        <div className="radio-options">
-                            <label>
-                                <input type="radio" name="attendance" value="yes" checked={formData.attendance === 'yes'} onChange={handleChange} />
-                                Będę
-                            </label>
-                            <label>
-                                <input type="radio" name="attendance" value="no" checked={formData.attendance === 'no'} onChange={handleChange} />
-                                Niestety nie mogę
-                            </label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                        <div className="space-y-4">
+                            <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500/80">Obecność</label>
+                            <select className="w-full bg-white/5 border-b border-white/10 p-5 focus:border-emerald-400 outline-none transition-all appearance-none text-white cursor-pointer text-lg">
+                                <option className="bg-slate-900">Tak, przybędę</option>
+                                <option className="bg-slate-900">Niestety nie mogę</option>
+                            </select>
+                        </div>
+                        <div className="space-y-4">
+                            <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500/80">Nocleg</label>
+                            <select className="w-full bg-white/5 border-b border-white/20 p-5 focus:border-emerald-400 outline-none transition-all appearance-none text-white cursor-pointer text-lg">
+                                <option className="bg-slate-900">Nie potrzebuję</option>
+                                <option className="bg-slate-900">Tak, w Hotelu Mazovia</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="diet">Dieta</label>
-                        <select name="diet" id="diet" value={formData.diet} onChange={handleChange}>
-                            <option value="standard">Standardowa</option>
-                            <option value="vegetarian">Wegetariańska</option>
-                            <option value="vegan">Wegańska</option>
-                            <option value="gluten-free">Bezglutenowa</option>
-                            <option value="other">Inna</option>
-                        </select>
+                    <div className="space-y-4">
+                        <label className="text-[10px] uppercase tracking-[0.3em] font-bold text-emerald-500/80">Dieta / Uwagi</label>
+                        <textarea
+                            className="w-full bg-white/5 border-b border-white/10 p-5 focus:border-emerald-400 outline-none transition-all h-32 placeholder:text-white/5 font-light text-lg"
+                            placeholder="Np. dieta wegetariańska, alergie..."
+                        ></textarea>
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="allergies">Alergie / Uwagi</label>
-                        <textarea name="allergies" id="allergies" value={formData.allergies} onChange={handleChange} />
-                    </div>
-
-                    <div className="form-group checkbox-group">
-                        <label className="checkbox-label">
-                            <input type="checkbox" name="hasPlusOne" checked={formData.hasPlusOne} onChange={handleCheckbox} />
-                            Osoba Towarzysząca
-                        </label>
-                    </div>
-
-                    {formData.hasPlusOne && (
-                        <div className="plus-one-fields fade-in">
-                            <div className="form-group">
-                                <label htmlFor="plusOneName">Imię i Nazwisko Osoby Towarzyszącej</label>
-                                <input type="text" name="plusOneName" value={formData.plusOneName} onChange={handleChange} />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="plusOneDiet">Dieta Osoby Towarzyszącej</label>
-                                <select name="plusOneDiet" value={formData.plusOneDiet} onChange={handleChange}>
-                                    <option value="standard">Standardowa</option>
-                                    <option value="vegetarian">Wegetariańska</option>
-                                    <option value="vegan">Wegańska</option>
-                                    <option value="gluten-free">Bezglutenowa</option>
-                                    <option value="other">Inna</option>
-                                </select>
-                            </div>
-                        </div>
-                    )}
-
-                    <div className="form-actions">
-                        <Button type="submit">Wyślij</Button>
-                    </div>
+                    <button
+                        disabled={rsvpStatus !== 'idle'}
+                        className="w-full py-8 bg-emerald-600 text-white rounded-full font-bold uppercase tracking-[0.5em] text-xs hover:bg-white hover:text-slate-900 transition-all flex items-center justify-center gap-4 shadow-[0_20px_50px_rgba(5,150,105,0.3)] group mt-12"
+                    >
+                        {rsvpStatus === 'idle' && <>Wyślij Wiadomość <Heart size={18} className="group-hover:fill-current" /></>}
+                        {rsvpStatus === 'loading' && <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>}
+                        {rsvpStatus === 'success' && <><CheckCircle2 size={24} /> Do zobaczenia!</>}
+                    </button>
                 </form>
             </div>
         </section>
     );
 };
-

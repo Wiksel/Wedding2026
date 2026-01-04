@@ -1,5 +1,6 @@
 import React from 'react';
-import './Layout.css';
+import { Navbar } from './Navbar';
+import { Footer } from './Footer';
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -7,24 +8,12 @@ interface LayoutProps {
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
-        <div className="app-layout">
-            <div className="fairy-lights-container">
-                {Array.from({ length: 20 }).map((_, i) => (
-                    <div
-                        key={i}
-                        className="fairy-light"
-                        style={{
-                            top: `${Math.random() * 100}%`,
-                            left: `${Math.random() * 100}%`,
-                            animationDelay: `${Math.random() * 5}s`,
-                            opacity: Math.random() * 0.5 + 0.2
-                        }}
-                    />
-                ))}
-            </div>
-            <main className="content-wrapper">
+        <div className="min-h-screen bg-[#fcfaf7] text-slate-900 font-sans selection:bg-emerald-50">
+            <Navbar />
+            <main>
                 {children}
             </main>
+            <Footer />
         </div>
     );
 };

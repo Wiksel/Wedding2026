@@ -1,36 +1,30 @@
-import React from 'react';
-import './TimelineSection.css';
-import { useScrollReveal } from '../../hooks/useScrollReveal';
 
-interface TimelineItem {
-    time: string;
-    title: string;
-    icon?: string;
-}
+import { SectionTitle } from '../ui/SectionTitle';
 
-const events: TimelineItem[] = [
-    { time: '16:00', title: 'Ceremonia Zaślubin' },
-    { time: '17:30', title: 'Przyjazd do Domu Weselnego' },
-    { time: '18:00', title: 'Pierwszy Taniec i Kolacja' },
-    { time: '22:00', title: 'Tort i Podziękowania' },
-];
+export const TimelineSection = () => {
+    const events = [
+        { time: '16:00', event: 'Ceremonia Zaślubin', desc: 'Parafia św. Jana Chrzciciela w Kroczewie.' },
+        { time: '17:30', event: 'Przyjazd na Salę', desc: 'Rezydencja Miętowe Wzgórza.' },
+        { time: '18:30', event: 'Uroczysty Obiad', desc: 'Rozpoczęcie przyjęcia weselnego.' },
+        { time: '20:00', event: 'Pierwszy Taniec', desc: 'Oficjalne otwarcie parkietu.' }
+    ];
 
-export const TimelineSection: React.FC = () => {
-    const revealRef = useScrollReveal();
     return (
-        <section className="timeline-section">
-            <div className="reveal-hidden" ref={revealRef}>
-                <h2 className="section-title">Przebieg Dnia</h2>
-                <div className="timeline-container">
-                    {events.map((event, index) => (
-                        <div key={index} className="timeline-item">
-                            <div className="timeline-time">{event.time}</div>
-                            <div className="timeline-marker"></div>
-                            <div className="timeline-content">
-                                <h3 className="timeline-title">{event.title}</h3>
-                            </div>
+        <section id="harmonogram" className="py-32 max-w-5xl mx-auto px-6">
+            <SectionTitle subtitle="Wyjątkowe Chwile">Plan Wydarzeń</SectionTitle>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="relative border-l-2 border-emerald-100 ml-4 md:ml-8 space-y-20 pb-8">
+                    {events.map((item, idx) => (
+                        <div key={idx} className="relative pl-12 group">
+                            <div className="absolute -left-[11px] top-0 w-5 h-5 rounded-full bg-emerald-600 border-4 border-white shadow-lg group-hover:scale-150 transition-all duration-500"></div>
+                            <div className="text-emerald-800 font-bold mb-1 text-sm tracking-widest">{item.time}</div>
+                            <h3 className="text-2xl font-serif mb-2 group-hover:text-emerald-700 transition-colors italic">{item.event}</h3>
+                            <p className="text-slate-500 text-sm leading-relaxed max-w-xs">{item.desc}</p>
                         </div>
                     ))}
+                </div>
+                <div className="hidden md:block rounded-[3rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-700 border-8 border-white">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Detale ślubne" className="w-full h-full object-cover" />
                 </div>
             </div>
         </section>
