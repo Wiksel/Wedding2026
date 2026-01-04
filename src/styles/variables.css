@@ -1,0 +1,39 @@
+:root {
+  /* Palette "Ethereal Garden" */
+  --color-ivory-silk: #FAF9F6;
+  --color-antique-gold: #C5A059;
+  --color-sage-leaf: #8A9A5B;
+  --color-deep-forest: #2D3426;
+  --color-fairy-light: rgba(255, 244, 214, 0.6);
+  --color-fairy-light-dim: rgba(255, 244, 214, 0.2);
+
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-accent: 'Great Vibes', cursive;
+  
+  /* Spacing & Layout */
+  --spacing-unit: 8px;
+  --container-width: 1200px;
+  --border-radius-card: 12px;
+  
+  /* Shadows */
+  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-gold: 0 0 15px rgba(197, 160, 89, 0.4);
+}
+
+body {
+  background-color: var(--color-ivory-silk);
+  font-family: var(--font-body);
+  color: var(--color-deep-forest);
+  line-height: 1.8;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--color-antique-gold);
+}
