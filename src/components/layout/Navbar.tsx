@@ -28,7 +28,7 @@ export const Navbar = () => {
         }
     };
 
-    const navItems = ['Harmonogram', 'Galeria', 'Lokalizacja', 'RSVP'];
+    const navItems = ['Harmonogram', 'Galeria', 'Lokalizacja', 'Transport', 'RSVP'];
 
     return (
         <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-8'}`}>
@@ -40,15 +40,15 @@ export const Navbar = () => {
                     Wiktoria & Bartek
                 </div>
 
-                <div className={`hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-bold transition-colors ${scrolled ? 'text-slate-600' : 'text-white/90 drop-shadow-md'}`}>
+                <div className={`hidden md:flex space-x-12 text-sm uppercase tracking-[0.25em] font-extrabold transition-colors ${scrolled ? 'text-slate-700' : 'text-white drop-shadow-lg'}`}>
                     {navItems.map((item) => (
                         <button
                             key={item}
                             onClick={() => scrollToSection(item.toLowerCase())}
-                            className="hover:text-emerald-500 transition-colors relative group"
+                            className="hover:text-emerald-400 transition-colors relative group py-2"
                         >
                             {item}
-                            <span className="absolute -bottom-1 left-0 w-0 h-px bg-emerald-500 transition-all group-hover:w-full"></span>
+                            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-400 transition-all group-hover:w-full"></span>
                         </button>
                     ))}
                 </div>

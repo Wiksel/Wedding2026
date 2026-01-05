@@ -4,18 +4,23 @@ import { TimelineSection } from './components/sections/TimelineSection';
 import { GallerySection } from './components/sections/GallerySection';
 import { LocationsSection } from './components/sections/LocationsSection';
 import { InfoSection } from './components/sections/InfoSection';
+import { BusSchedule } from './components/sections/BusSchedule';
 import { RSVPSection } from './components/sections/RSVPSection';
+import { PasswordGateway } from './components/auth/PasswordGateway';
 
 function App() {
   return (
-    <Layout>
-      <HeroSection />
-      <TimelineSection />
-      <GallerySection />
-      <LocationsSection />
-      <InfoSection />
-      <RSVPSection />
-    </Layout>
+    <PasswordGateway>
+      <Layout>
+        <HeroSection />
+        <TimelineSection />
+        <GallerySection />
+        <LocationsSection />
+        <BusSchedule />
+        <InfoSection />
+        <RSVPSection />
+      </Layout>
+    </PasswordGateway>
   );
 }
 

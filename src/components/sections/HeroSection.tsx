@@ -23,22 +23,25 @@ export const HeroSection = () => {
         <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0">
                 <img
-                    src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=2000"
+                    src="/images/hero-bg-luxury.png"
                     className="w-full h-full object-cover animate-pulse-slow brightness-[0.85]"
                     alt="Tło ślubne elegancja"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20"></div>
             </div>
 
-            <div className="relative text-center text-white px-4 pt-24 max-w-5xl space-y-6">
+            <div className="relative text-center text-white px-4 pt-24 w-full max-w-7xl space-y-8">
                 <p className="font-script text-2xl md:text-5xl text-emerald-100 animate-in fade-in duration-1000 mb-2 md:mb-4 drop-shadow-lg">Na zawsze zaczyna się dzisiaj</p>
-                <h1 className="text-5xl sm:text-7xl md:text-[9rem] lg:text-[11rem] font-serif italic leading-none animate-in slide-in-from-bottom duration-1000 tracking-tight drop-shadow-2xl">
-                    Wiktoria <span className="text-3xl md:text-7xl block md:inline font-script align-middle my-2 md:my-0 mx-0 md:mx-6">&</span> Bartek
+
+                {/* Updated Typography and Layout */}
+                <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-script leading-none animate-in slide-in-from-bottom duration-1000 tracking-wide drop-shadow-2xl whitespace-nowrap">
+                    Wiktoria & Bartek
                 </h1>
-                <div className="flex items-center justify-center space-x-3 md:space-x-6 animate-in fade-in duration-1000 delay-300">
-                    <div className="h-px w-8 md:w-16 bg-white/40"></div>
-                    <p className="text-sm md:text-3xl font-light tracking-[0.3em] md:tracking-[0.5em] uppercase drop-shadow-md">02.10.2026 • Kroczewo</p>
-                    <div className="h-px w-8 md:w-16 bg-white/40"></div>
+
+                <div className="flex items-center justify-center space-x-6 animate-in fade-in duration-1000 delay-300">
+                    <div className="h-px w-12 md:w-24 bg-white/60"></div>
+                    <p className="text-lg md:text-3xl font-light tracking-[0.4em] uppercase drop-shadow-md whitespace-nowrap">02.10.2026 • Kroczewo</p>
+                    <div className="h-px w-12 md:w-24 bg-white/60"></div>
                 </div>
 
                 <div className="mt-8 md:mt-12">

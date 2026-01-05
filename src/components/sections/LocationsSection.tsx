@@ -1,4 +1,3 @@
-
 import { ExternalLink } from 'lucide-react';
 import { SectionTitle } from '../ui/SectionTitle';
 
@@ -9,14 +8,14 @@ export const LocationsSection = () => {
             place: 'Parafia św. Jana Chrzciciela',
             addr: 'ul. Kroczewo 52, 09-142 Kroczewo',
             url: 'https://maps.app.goo.gl/MihPNSyeNvz816ed9',
-            img: 'https://images.unsplash.com/photo-1548625361-1250325439a0?auto=format&fit=crop&q=80&w=800'
+            img: '/images/venue.jpg'
         },
         {
             title: 'Przyjęcie Weselne',
             place: 'Rezydencja Miętowe Wzgórza',
             addr: 'Trębki Nowe 90, 05-170 Zakroczym',
             url: 'https://maps.app.goo.gl/zPwo1KwiYotGGfZ3A',
-            img: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80&w=800'
+            img: '/images/church.png'
         }
     ];
 
