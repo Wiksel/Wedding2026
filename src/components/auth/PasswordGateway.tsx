@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, type ReactNode, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 // Import isolated flower assets
@@ -9,7 +9,7 @@ import flowerLeaf from '../../assets/flower-leaf.png';
 import { Lock, ArrowRight } from 'lucide-react';
 
 interface PasswordGatewayProps {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 const CORRECT_PASSWORD = 'wikbartest123';
@@ -17,7 +17,6 @@ const STORAGE_KEY = 'wedding_auth_token';
 
 // Flower configuration
 const FLOWER_ASSETS = [flowerOrange, flowerPink, flowerRed, flowerLeaf];
-const NUM_FLOWERS = 150; // Increased count for better coverage
 
 interface FlowerData {
     id: number;
@@ -77,7 +76,7 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
         return items.sort(() => Math.random() - 0.5);
     }, []);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (password === CORRECT_PASSWORD) {
             setIsRevealing(true); // Trigger explosion
