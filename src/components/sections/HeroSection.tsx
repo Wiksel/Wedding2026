@@ -1,6 +1,8 @@
 import { ChevronDown } from 'lucide-react';
 import { Countdown } from '../ui/Countdown';
 
+import heroBg from '../../assets/Hero_Background_v1.png';
+
 export const HeroSection = () => {
     const scrollToNextSection = () => {
         const element = document.getElementById('rsvp');
@@ -22,9 +24,9 @@ export const HeroSection = () => {
         <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0">
                 <img
-                    src="/images/hero-bg-luxury.png"
-                    className="w-full h-full object-cover animate-pulse-slow brightness-[0.85]"
-                    alt="Tło ślubne elegancja"
+                    src={heroBg}
+                    className="w-full h-full object-cover object-[center_40%] animate-pulse-slow brightness-[0.85] blur-[6px] scale-105"
+                    alt="Tło ślubne"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20"></div>
             </div>
