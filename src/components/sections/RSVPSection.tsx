@@ -622,7 +622,7 @@ export const RSVPSection = () => {
             </div>
 
             <div className="w-full max-w-4xl mx-auto px-6 relative z-10">
-                <SectionTitle theme="dark">Potwierdzenie Obecności</SectionTitle>
+                <SectionTitle theme="dark">Potwierdź Obecność</SectionTitle>
 
                 <form onSubmit={handleSubmit} className="w-full mt-16 space-y-12 bg-white/5 p-6 md:p-12 rounded-[3rem] border border-white/10 shadow-2xl backdrop-blur-xl">
 
