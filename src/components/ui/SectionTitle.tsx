@@ -1,23 +1,17 @@
 import React from 'react';
 
 interface SectionTitleProps {
-    subtitle?: string;
     children: React.ReactNode;
     theme?: 'light' | 'dark';
 }
 
-export const SectionTitle: React.FC<SectionTitleProps> = ({ subtitle, children, theme = 'light' }) => {
+export const SectionTitle: React.FC<SectionTitleProps> = ({ children, theme = 'light' }) => {
     return (
-        <div className="text-center mb-16 space-y-2">
-            {subtitle && (
-                <p className={`font-script text-3xl mb-2 ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-600'}`}>
-                    {subtitle}
-                </p>
-            )}
-            <h2 className={`text-4xl md:text-6xl font-serif italic tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-800'}`}>
+        <div className="text-center mb-16 space-y-2 relative z-10">
+            <h2 className={`text-5xl md:text-7xl font-script ${theme === 'dark' ? 'text-wed-beige' : 'text-wed-green-dark'} drop-shadow-sm tracking-wide`}>
                 {children}
             </h2>
-            <div className={`w-16 h-px mx-auto mt-6 ${theme === 'dark' ? 'bg-emerald-500/50' : 'bg-emerald-200'}`}></div>
+            <div className={`w-24 h-px mx-auto mt-4 ${theme === 'dark' ? 'bg-wed-green-light/50' : 'bg-wed-green/30'}`}></div>
         </div>
     );
 };

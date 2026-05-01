@@ -12,7 +12,7 @@ export const GallerySection = () => {
     return (
         <section id="galeria" className="py-32 bg-stone-100/30">
             <div className="max-w-7xl mx-auto px-6 text-center">
-                <SectionTitle subtitle="Nasza Historia">Galeria Wspomnień</SectionTitle>
+                <SectionTitle>Nasze Wspomnienia</SectionTitle>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
                     {images.map((img, i) => (
                         <div key={i} className="aspect-[3/4] rounded-3xl overflow-hidden shadow-lg group">

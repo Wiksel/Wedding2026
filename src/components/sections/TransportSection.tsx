@@ -25,7 +25,7 @@ export const TransportSection = () => {
     return (
         <section id="transport" className="py-32 bg-stone-100">
             <div className="max-w-6xl mx-auto px-6">
-                <SectionTitle subtitle="Wygoda Gości">Transport</SectionTitle>
+                <SectionTitle>Transport dla Gości</SectionTitle>
 
                 <div className="grid md:grid-cols-2 gap-12">
                     {schedule.map((group, idx) => (

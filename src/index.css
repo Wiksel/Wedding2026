@@ -10,31 +10,56 @@
     --font-serif: "Playfair Display", serif;
     --font-sans: "Inter", sans-serif;
 
+    /* Base Palette from Invitation */
+    --color-wed-beige: #F9F4ED;
+    --color-wed-beige-light: #FDFBFA;
+    --color-wed-beige-dark: #E8DECC;
+    
+    --color-wed-green: #678c70;
+    --color-wed-green-light: #9eb5a3; 
+    --color-wed-green-dark: #3a5241;
+    --color-wed-green-darker: #1A261D;
+    
+    --color-wed-pink: #DB707A;
+    --color-wed-coral: #DF6C51;
+    --color-wed-peach: #EBA97E;
+    
+    --color-wed-text: #2c3630;
+
     --animate-pulse-slow: pulse-slow 20s ease-in-out infinite;
+    --animate-float: float 6s ease-in-out infinite;
 
     @keyframes pulse-slow {
-
-        0%,
-        100% {
+        0%, 100% {
             transform: scale(1);
             opacity: 0.9;
         }
-
         50% {
             transform: scale(1.03);
             opacity: 1;
         }
     }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
 }
 
 @layer base {
+    html {
+        scroll-behavior: smooth;
+    }
     body {
-        @apply bg-[#fcfaf7] text-slate-900 font-sans selection:bg-emerald-50;
+        @apply bg-wed-beige text-wed-text font-sans selection:bg-wed-green-light/30 selection:text-wed-green-dark;
     }
 }
 
 @layer utilities {
     .glass-card {
-        @apply bg-white/70 backdrop-blur-md border border-white/30;
+        @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-xl transform-gpu;
+    }
+    .glass-dark {
+        @apply bg-wed-green-darker/60 backdrop-blur-xl border border-wed-green-light/20 shadow-2xl;
     }
 }

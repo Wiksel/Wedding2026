@@ -13,12 +13,12 @@ function App() {
     <PasswordGateway>
       <Layout>
         <HeroSection />
-        <TimelineSection />
-        <GallerySection />
-        <LocationsSection />
-        <BusSchedule />
-        <InfoSection />
         <RSVPSection />
+        <LocationsSection />
+        <InfoSection />
+        <TimelineSection />
+        {/* <GallerySection /> */}
+        <BusSchedule />
       </Layout>
     </PasswordGateway>
   );

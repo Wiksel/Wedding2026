@@ -14,7 +14,7 @@ export const Navbar = () => {
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
-            const offset = 80;
+            const offset = 68;
             const bodyRect = document.body.getBoundingClientRect().top;
             const elementRect = element.getBoundingClientRect().top;
             const elementPosition = elementRect - bodyRect;
@@ -28,32 +28,32 @@ export const Navbar = () => {
         }
     };
 
-    const navItems = ['Harmonogram', 'Galeria', 'Lokalizacja', 'Transport', 'RSVP'];
+    const navItems = ['RSVP', 'Lokalizacja', 'Informacje', 'Harmonogram', 'Transport'];
 
     return (
-        <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md py-4' : 'bg-transparent py-8'}`}>
+        <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'} py-4`}>
             <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
                 <div
-                    className={`text-3xl font-script tracking-wider cursor-pointer transition-colors ${scrolled ? 'text-slate-800' : 'text-white drop-shadow-md'}`}
+                    className={`text-3xl font-script tracking-wider cursor-pointer transition-all duration-500 ${scrolled ? 'text-wed-green-darker' : 'text-white drop-shadow-md'}`}
                     onClick={() => scrollToSection('hero')}
                 >
                     Wiktoria & Bartek
                 </div>
 
-                <div className={`hidden md:flex space-x-12 text-sm uppercase tracking-[0.25em] font-extrabold transition-colors ${scrolled ? 'text-slate-700' : 'text-white drop-shadow-lg'}`}>
+                <div className="hidden md:flex space-x-12 text-sm uppercase tracking-[0.25em] font-extrabold">
                     {navItems.map((item) => (
                         <button
                             key={item}
                             onClick={() => scrollToSection(item.toLowerCase())}
-                            className="hover:text-emerald-400 transition-colors relative group py-2"
+                            className={`relative group py-2 transition-all duration-500 hover:text-wed-green ${scrolled ? 'text-wed-green-darker' : 'text-white drop-shadow-md'}`}
                         >
                             {item}
-                            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-emerald-400 transition-all group-hover:w-full"></span>
+                            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-wed-green transition-all group-hover:w-full"></span>
                         </button>
                     ))}
                 </div>
 
-                <button className={`md:hidden p-2 ${scrolled ? 'text-slate-800' : 'text-white'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button className={`md:hidden p-2 transition-all duration-500 ${scrolled ? 'text-wed-green-darker' : 'text-white drop-shadow-md'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
@@ -66,7 +66,7 @@ export const Navbar = () => {
                             <button
                                 key={item}
                                 onClick={() => scrollToSection(item.toLowerCase())}
-                                className="text-left text-sm uppercase tracking-widest font-bold text-slate-800 hover:text-emerald-600 py-2"
+                                className="text-left text-sm uppercase tracking-widest font-bold text-wed-green-darker hover:text-wed-green py-2 transition-colors"
                             >
                                 {item}
                             </button>

@@ -1,10 +1,9 @@
-
 import { ChevronDown } from 'lucide-react';
 import { Countdown } from '../ui/Countdown';
 
 export const HeroSection = () => {
-    const scrollToHarmonogram = () => {
-        const element = document.getElementById('harmonogram');
+    const scrollToNextSection = () => {
+        const element = document.getElementById('rsvp');
         if (element) {
             const offset = 80;
             const bodyRect = document.body.getBoundingClientRect().top;
@@ -31,8 +30,6 @@ export const HeroSection = () => {
             </div>
 
             <div className="relative text-center text-white px-4 pt-24 w-full max-w-7xl space-y-8">
-                <p className="font-script text-2xl md:text-5xl text-emerald-100 animate-in fade-in duration-1000 mb-2 md:mb-4 drop-shadow-lg">Na zawsze zaczyna się dzisiaj</p>
-
                 {/* Updated Typography and Layout */}
                 <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-script leading-none animate-in slide-in-from-bottom duration-1000 tracking-wide drop-shadow-2xl whitespace-nowrap">
                     Wiktoria & Bartek
@@ -49,7 +46,7 @@ export const HeroSection = () => {
                 </div>
             </div>
 
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer opacity-60 hover:opacity-100 transition-opacity" onClick={scrollToHarmonogram}>
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer opacity-60 hover:opacity-100 transition-opacity" onClick={scrollToNextSection}>
                 <ChevronDown size={44} className="text-white" />
             </div>
         </section>
