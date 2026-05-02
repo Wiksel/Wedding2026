@@ -28,13 +28,13 @@ export const Navbar = () => {
         }
     };
 
-    const navItems = ['RSVP', 'Lokalizacja', 'Informacje', 'Harmonogram', 'Transport'];
+    const navItems = ['RSVP', 'Lokalizacje', 'Informacje', 'Harmonogram', 'Transport'];
 
     return (
         <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'} py-4`}>
             <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
                 <div
-                    className={`text-3xl font-script tracking-wider cursor-pointer transition-all duration-500 ${scrolled ? 'text-wed-green-darker' : 'text-white drop-shadow-md'}`}
+                    className={`text-3xl font-script tracking-wider cursor-pointer transition-all duration-500 ${scrolled ? 'text-wed-green-darker' : 'text-wed-accent-light drop-shadow-md'}`}
                     onClick={() => scrollToSection('hero')}
                 >
                     Wiktoria & Bartek
@@ -45,7 +45,7 @@ export const Navbar = () => {
                         <button
                             key={item}
                             onClick={() => scrollToSection(item.toLowerCase())}
-                            className={`relative group py-2 transition-all duration-500 hover:text-wed-green ${scrolled ? 'text-wed-green-darker' : 'text-white drop-shadow-md'}`}
+                            className={`relative group py-2 transition-all duration-500 hover:text-wed-green ${scrolled ? 'text-wed-green-darker' : 'text-wed-accent-light drop-shadow-md'}`}
                         >
                             {item}
                             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-wed-green transition-all group-hover:w-full"></span>
@@ -53,20 +53,28 @@ export const Navbar = () => {
                     ))}
                 </div>
 
-                <button className={`md:hidden p-2 transition-all duration-500 ${scrolled ? 'text-wed-green-darker' : 'text-white drop-shadow-md'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button className={`md:hidden p-2 transition-all duration-500 ${scrolled ? 'text-wed-green-darker' : 'text-wed-accent-light drop-shadow-md'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                     {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
             {/* Mobile Menu Overlay */}
             {isMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-t border-slate-100 py-4 shadow-xl animate-in slide-in-from-top-5">
-                    <div className="flex flex-col space-y-4 px-8">
+                <div className={`md:hidden absolute top-full left-0 w-full transition-all duration-500 overflow-hidden rounded-b-[2rem]
+                    ${scrolled
+                        ? 'bg-white/90 backdrop-blur-sm border-b border-slate-200 shadow-xl'
+                        : 'bg-black/30 backdrop-blur-sm border-b border-black/2 shadow-2xl'
+                    } py-10 animate-in slide-in-from-top-5`}>
+                    <div className="flex flex-col space-y-6 px-10">
                         {navItems.map((item) => (
                             <button
                                 key={item}
                                 onClick={() => scrollToSection(item.toLowerCase())}
-                                className="text-left text-sm uppercase tracking-widest font-bold text-wed-green-darker hover:text-wed-green py-2 transition-colors"
+                                className={`text-left text-sm uppercase tracking-[0.25em] font-extrabold transition-all duration-300
+                                    ${scrolled
+                                        ? 'text-wed-green-darker hover:text-wed-green'
+                                        : 'text-wed-accent-light hover:text-white drop-shadow-md'}
+                                `}
                             >
                                 {item}
                             </button>

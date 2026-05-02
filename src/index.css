@@ -24,19 +24,23 @@
     --color-wed-coral: #DF6C51;
     --color-wed-peach: #EBA97E;
     
+    --color-wed-accent: #B5C7B9;
+    --color-wed-accent-light: #D9E4DD;
+    --color-wed-accent-dark: #8BA88E;
+    
     --color-wed-text: #2c3630;
+
+
 
     --animate-pulse-slow: pulse-slow 20s ease-in-out infinite;
     --animate-float: float 6s ease-in-out infinite;
 
     @keyframes pulse-slow {
         0%, 100% {
-            transform: scale(1);
-            opacity: 0.9;
+            transform: scale(1.1);
         }
         50% {
-            transform: scale(1.03);
-            opacity: 1;
+            transform: scale(1.15);
         }
     }
     

@@ -6,8 +6,8 @@ interface CountdownProps {
 
 const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     <div className="flex flex-col items-center">
-        <span className="text-3xl md:text-5xl font-serif text-white">{value.toString().padStart(2, '0')}</span>
-        <span className="text-[10px] uppercase tracking-[0.3em] text-white/60 mt-1">{label}</span>
+        <span className="text-3xl md:text-5xl font-serif text-wed-accent-light">{value.toString().padStart(2, '0')}</span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-wed-accent-light/70 mt-1">{label}</span>
     </div>
 );
 
@@ -34,7 +34,7 @@ export const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     }, [targetDate]);
 
     return (
-        <div className="flex justify-center space-x-6 md:space-x-12 mt-12 animate-in fade-in zoom-in duration-1000 delay-500 bg-black/10 backdrop-blur-md p-8 rounded-3xl border border-white/10 shadow-2xl">
+        <div className="flex justify-center space-x-6 md:space-x-12 mt-12 animate-in fade-in zoom-in duration-1000 delay-500 bg-black/10 backdrop-blur-md p-8 rounded-3xl border border-wed-accent-light/20 shadow-2xl">
             <TimeUnit value={timeLeft.days} label="Dni" />
             <TimeUnit value={timeLeft.hours} label="Godz" />
             <TimeUnit value={timeLeft.minutes} label="Min" />

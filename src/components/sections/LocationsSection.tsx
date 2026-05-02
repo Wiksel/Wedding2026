@@ -30,7 +30,7 @@ export const LocationsSection = () => {
     ];
 
     return (
-        <section id="lokalizacja" className="pt-8 pb-24 md:pt-12 md:pb-36 relative min-h-[calc(100svh-68px)] flex flex-col justify-center">
+        <section id="lokalizacje" className="pt-8 pb-24 md:pt-12 md:pb-36 relative min-h-[calc(100svh-68px)] flex flex-col justify-center">
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <SectionTitle>Kluczowe Miejsca</SectionTitle>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
