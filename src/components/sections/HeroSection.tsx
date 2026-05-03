@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Countdown } from '../ui/Countdown';
-import heroBg from '../../assets/Hero_Background_v1.png';
+import heroBg from '../../assets/Backgrounds/Hero_Background_v1.png';
 
 const REF_W = 1920;
 const REF_H = 1080;
