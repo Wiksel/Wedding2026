@@ -1,12 +1,8 @@
-import { useState, useEffect, useMemo, type ReactNode, type FormEvent } from 'react';
+import { useState, useEffect, type ReactNode, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
-// Import isolated flower assets
-import flowerOrange from '../../assets/flower-orange.png';
-import flowerPink from '../../assets/flower-pink.png';
-import flowerRed from '../../assets/flower-red.png';
-import flowerLeaf from '../../assets/flower-leaf.png';
 import { Lock, ArrowRight } from 'lucide-react';
+import passwordBg from '../../assets/Backgrounds/Password_BG.webp';
 
 interface PasswordGatewayProps {
     children: ReactNode;
@@ -15,25 +11,11 @@ interface PasswordGatewayProps {
 const CORRECT_PASSWORD = 'wikbartest123';
 const STORAGE_KEY = 'wedding_auth_token';
 
-// Flower configuration
-const FLOWER_ASSETS = [flowerOrange, flowerPink, flowerRed, flowerLeaf];
-
-interface FlowerData {
-    id: number;
-    src: string;
-    top: number;
-    left: number;
-    scale: number;
-    rotation: number;
-    delay: number;
-    zIndex: number;
-}
-
 export function PasswordGateway({ children }: PasswordGatewayProps) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
-    const [isRevealing, setIsRevealing] = useState(false); // Controls the explosion animation
+    const [isRevealing, setIsRevealing] = useState(false);
 
     useEffect(() => {
         const storedAuth = sessionStorage.getItem(STORAGE_KEY);
@@ -42,50 +24,14 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
         }
     }, []);
 
-    // Generate random flower positions
-    const flowers = useMemo<FlowerData[]>(() => {
-        // Create a grid to ensure better coverage without too much overlap
-        // 10x15 grid = 150 flowers
-        const cols = 10;
-        const rows = 15;
-        const cellWidth = 100 / cols;
-        const cellHeight = 100 / rows;
-
-        const items: FlowerData[] = [];
-        let idCount = 0;
-
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                // Randomize position within the cell
-                const top = (r * cellHeight) + (Math.random() * cellHeight * 1.2) - 5; // -5 to +5 overlap
-                const left = (c * cellWidth) + (Math.random() * cellWidth * 1.2) - 5;
-
-                items.push({
-                    id: idCount++,
-                    src: FLOWER_ASSETS[Math.floor(Math.random() * FLOWER_ASSETS.length)],
-                    top,
-                    left,
-                    scale: 0.2 + Math.random() * 0.3, // 0.2 to 0.5 scale
-                    rotation: Math.random() * 360,
-                    delay: 0, // No delay needed for static
-                    zIndex: Math.floor(Math.random() * 50), // Higher z-index range for layering
-                });
-            }
-        }
-        // Shuffle the array so z-indexes don't look like a grid
-        return items.sort(() => Math.random() - 0.5);
-    }, []);
-
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         if (password === CORRECT_PASSWORD) {
-            setIsRevealing(true); // Trigger explosion
-
-            // Allow animation to play before unmounting
+            setIsRevealing(true);
             setTimeout(() => {
                 setIsAuthenticated(true);
                 sessionStorage.setItem(STORAGE_KEY, 'true');
-            }, 1500);
+            }, 2000);
         } else {
             setError(true);
             setTimeout(() => setError(false), 500);
@@ -98,86 +44,50 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
 
     return (
         <>
-            {/* Main App Content - Always rendered behind, revealed as flowers fly away */}
-            <div className={cn("transition-opacity duration-1000", isAuthenticated ? "opacity-100" : "opacity-0 fixed inset-0 overflow-hidden")}>
+            {/* Main App Content - Always rendered behind, revealed as auth layer fades */}
+            <div className={cn(
+                "transition-opacity duration-[2000ms] ease-in-out",
+                (isAuthenticated || isRevealing) ? "opacity-100" : "opacity-0 fixed inset-0 overflow-hidden"
+            )}>
                 {children}
             </div>
 
             {/* Auth Layer */}
             {!isAuthenticated && (
-                <div className="fixed inset-0 z-[100] overflow-hidden pointer-events-none">
-                    {/* Note: pointer-events-none on container so we can click through if needed? 
-                        No, we need to click the form. 
-                        Actually, let's keep pointer-events-auto but make the flowers ignored.
-                    */}
-                    <div className="absolute inset-0 z-0 bg-transparent pointer-events-auto">
+                <motion.div 
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: isRevealing ? 0 : 1 }}
+                    transition={{ duration: 2, ease: "easeInOut" }}
+                    className="fixed inset-0 z-[100] overflow-hidden"
+                >
+                    {/* Background Image */}
+                    <motion.div 
+                        initial={{ scale: 1.05, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="absolute inset-0 z-0"
+                    >
+                        <picture>
+                            <img 
+                                src={passwordBg} 
+                                alt="" 
+                                className="w-full h-full object-cover"
+                                // @ts-ignore
+                                fetchpriority="high"
+                            />
+                        </picture>
+                        <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
+                    </motion.div>
 
-                        {/* Scattered Flowers */}
+                    {/* Login Form Container */}
+                    <div className="relative z-[200] w-full h-full flex items-center justify-center p-4">
                         <AnimatePresence>
-                            {(!isAuthenticated || isRevealing) && (
-                                <>
-                                    {
-                                        flowers.map((flower) => {
-                                            // Calculate explosion vector (away from center)
-                                            const xDir = flower.left - 50;
-                                            const yDir = flower.top - 50;
-                                            // Normalize and scale magnitude
-                                            const mag = Math.sqrt(xDir * xDir + yDir * yDir) || 1;
-                                            const exitX = (xDir / mag) * 1500; // Fly far off screen
-                                            const exitY = (yDir / mag) * 1500;
-
-                                            return (
-                                                <motion.img
-                                                    key={flower.id}
-                                                    src={flower.src}
-                                                    alt=""
-                                                    initial={{
-                                                        top: `${flower.top}%`,
-                                                        left: `${flower.left}%`,
-                                                        x: "-50%",
-                                                        y: "-50%",
-                                                        scale: flower.scale,
-                                                        rotate: flower.rotation,
-                                                    }}
-                                                    animate={isRevealing ? {
-                                                        x: exitX,
-                                                        y: exitY,
-                                                        scale: flower.scale * 1.2,
-                                                        opacity: 0,
-                                                    } : {
-                                                        // Static idle state
-                                                        x: "-50%",
-                                                        y: "-50%",
-                                                        rotate: flower.rotation,
-                                                        opacity: 1
-                                                    }}
-                                                    transition={isRevealing ? {
-                                                        duration: 1.5,
-                                                        ease: [0.22, 1, 0.36, 1], // Custom easy ease
-                                                    } : {
-                                                        duration: 0 // No animation for idle
-                                                    }}
-                                                    className="absolute pointer-events-none drop-shadow-md"
-                                                    style={{ zIndex: flower.zIndex }}
-                                                />
-                                            );
-                                        })
-                                    }
-                                </>
-                            )}
-                        </AnimatePresence>
-                    </div>
-
-                    {/* Login Form Container - Fades out on reveal */}
-                    <AnimatePresence>
-                        {!isRevealing && (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.5 } }}
-                                className="relative z-[200] w-full h-full flex items-center justify-center p-4 pointer-events-auto"
-                            >
-                                <div className="relative w-full max-w-sm">
+                            {!isRevealing && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.98, transition: { duration: 1.2, ease: "easeInOut" } }}
+                                    className="relative w-full max-w-sm"
+                                >
                                     {/* Frosted Glass Card for Input */}
                                     <div className="absolute inset-0 bg-black/40 backdrop-blur-xl rounded-2xl shadow-2xl transform -rotate-1" />
                                     <div className="relative bg-white/10 border border-white/20 backdrop-blur-md rounded-2xl p-8 shadow-2xl">
@@ -227,13 +137,12 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
                                             )}
                                         </form>
                                     </div>
-                                </div>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div >
-            )
-            }
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </motion.div>
+            )}
         </>
     );
 }
