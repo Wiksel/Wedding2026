@@ -8,6 +8,7 @@ export const TimelineSection = () => {
             desc: 'Parafia św. Jana Chrzciciela w Kroczewie.',
             link: 'https://www.google.com/maps/place/Rzymskokatolicka+Parafia+%C5%9Bw.+Jana+Chrzciciela+w+Kroczewie/@52.4780955,20.5540151,17z/data=!3m1!4b1!4m16!1m9!4m8!1m0!1m6!1m2!1s0x471ea6486cd837c5:0x84182768b475442c!2sRzymskokatolicka+Parafia+%C5%9Bw.+Jana+Chrzciciela+w+Kroczewie,+Ko%C5%9Bcielna+2,+09-142+Kroczewo!2m2!1d20.5565389!2d52.478107!3m5!1s0x471ea6486cd837c5:0x84182768b475442c!8m2!3d52.4780923!4d20.55659!16s%2Fg%2F120j3pxg?entry=ttu&g_ep=EgoyMDI2MDQyOC4wIKXMDSoASAFQAw%3D%3D',
             isHidden: false
+            
         },
         { time: '18:00', event: 'Przyjazd na Salę', desc: 'Rezydencja Miętowe Wzgórza.', isHidden: true },
         { time: '18:30', event: 'Uroczysty Obiad', desc: 'Rozpoczęcie przyjęcia weselnego.', isHidden: true },

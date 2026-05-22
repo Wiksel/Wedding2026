@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode, type FormEvent } from 'react';
+import { useState, type ReactNode, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import { Lock, ArrowRight } from 'lucide-react';
@@ -8,21 +8,16 @@ interface PasswordGatewayProps {
     children: ReactNode;
 }
 
-const CORRECT_PASSWORD = 'wikbartest123';
+const CORRECT_PASSWORD = '021026!';
 const STORAGE_KEY = 'wedding_auth_token';
 
 export function PasswordGateway({ children }: PasswordGatewayProps) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(() => sessionStorage.getItem(STORAGE_KEY) === 'true');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const [isRevealing, setIsRevealing] = useState(false);
 
-    useEffect(() => {
-        const storedAuth = sessionStorage.getItem(STORAGE_KEY);
-        if (storedAuth === 'true') {
-            setIsAuthenticated(true);
-        }
-    }, []);
+    // initialization moved to useState initializer
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -54,22 +49,22 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
 
             {/* Auth Layer */}
             {!isAuthenticated && (
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 1 }}
                     animate={{ opacity: isRevealing ? 0 : 1 }}
                     transition={{ duration: 2, ease: "easeInOut" }}
                     className="fixed inset-0 z-[100] overflow-hidden"
                 >
                     {/* Background Image */}
-                    <motion.div 
+                    <motion.div
                         initial={{ scale: 1.05, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         className="absolute inset-0 z-0"
                     >
                         <picture>
-                            <img 
-                                src={passwordBg} 
-                                alt="" 
+                            <img
+                                src={passwordBg}
+                                alt=""
                                 className="w-full h-full object-cover"
                                 // @ts-ignore
                                 fetchpriority="high"
