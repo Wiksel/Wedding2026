@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Countdown } from '../ui/Countdown';
-import heroBg from '../../assets/Backgrounds/Hero_Background_v1.png';
+import heroBg from '../../assets/Backgrounds/Hero_Background_v1.webp';
+import { CEREMONY_START, type WeddingPhase } from '../../lib/weddingPhase';
 
 const REF_W = 1920;
 const REF_H = 1080;
@@ -83,7 +84,18 @@ function computeLayout(w: number, h: number) {
     return { transform, objY, pb, titleMb, dateMb, countdownMt };
 }
 
-export const HeroSection = () => {
+const HERO_MESSAGE: Record<Exclude<WeddingPhase, 'before'>, { title: string; text: string }> = {
+    during: {
+        title: 'To właśnie dziś!',
+        text: 'Dziękujemy, że jesteście z nami w tym wyjątkowym dniu. Bawmy się razem do białego rana!',
+    },
+    after: {
+        title: 'Dziękujemy za obecność!',
+        text: 'To, że byliście z nami, wiele dla nas znaczy.',
+    },
+};
+
+export const HeroSection = ({ phase, nextSectionId }: { phase: WeddingPhase; nextSectionId: string }) => {
     const sectionRef = useRef<HTMLElement>(null);
     const bgBoxRef = useRef<HTMLDivElement>(null);
     const imgRef = useRef<HTMLImageElement>(null);
@@ -135,7 +147,7 @@ export const HeroSection = () => {
     }, []);
 
     const scrollToNextSection = () => {
-        const el = document.getElementById('rsvp');
+        const el = document.getElementById(nextSectionId);
         if (el) {
             const offsetPosition =
                 el.getBoundingClientRect().top - document.body.getBoundingClientRect().top - 80;
@@ -213,7 +225,14 @@ export const HeroSection = () => {
                 </div>
 
                 <div ref={countdownRef} style={{ marginTop: '4px' }}>
-                    <Countdown targetDate="2026-10-02T16:00:00" />
+                    {phase === 'before' ? (
+                        <Countdown targetDate={CEREMONY_START} />
+                    ) : (
+                        <div className="mt-12 mx-auto max-w-2xl animate-in fade-in zoom-in duration-1000 bg-black/10 backdrop-blur-md px-8 py-7 rounded-3xl border border-wed-accent-light/20 shadow-2xl">
+                            <p className="text-3xl md:text-5xl font-serif text-wed-accent-light">{HERO_MESSAGE[phase].title}</p>
+                            <p className="mt-3 text-sm md:text-base font-light leading-relaxed text-wed-accent-light/90">{HERO_MESSAGE[phase].text}</p>
+                        </div>
+                    )}
                 </div>
             </div>
 

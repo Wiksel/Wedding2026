@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import type { NavItem } from '../../App';
 
-export const Navbar = () => {
+export const Navbar = ({ items }: { items: NavItem[] }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
@@ -28,8 +29,6 @@ export const Navbar = () => {
         }
     };
 
-    const navItems = ['RSVP', 'Lokalizacje', 'Informacje', 'Harmonogram', 'Transport'];
-
     return (
         <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'} py-4`}>
             <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
@@ -40,14 +39,14 @@ export const Navbar = () => {
                     Wiktoria & Bartek
                 </div>
 
-                <div className="hidden xl:flex space-x-12 text-sm uppercase tracking-[0.25em] font-extrabold">
-                    {navItems.map((item) => (
+                <div className="hidden xl:flex space-x-8 text-sm uppercase tracking-[0.2em] font-extrabold">
+                    {items.map((item) => (
                         <button
-                            key={item}
-                            onClick={() => scrollToSection(item.toLowerCase())}
-                            className={`relative group py-2 transition-all duration-500 hover:text-wed-green ${scrolled ? 'text-wed-green-darker' : 'text-wed-accent-light drop-shadow-md'}`}
+                            key={item.id}
+                            onClick={() => scrollToSection(item.id)}
+                            className={`relative group py-2 transition-all duration-500 hover:text-wed-green whitespace-nowrap ${scrolled ? 'text-wed-green-darker' : 'text-wed-accent-light drop-shadow-md'}`}
                         >
-                            {item}
+                            {item.label}
                             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-wed-green transition-all group-hover:w-full"></span>
                         </button>
                     ))}
@@ -66,17 +65,17 @@ export const Navbar = () => {
                         : 'bg-black/30 backdrop-blur-sm border-b border-black/2 shadow-2xl'
                     } py-10 animate-in slide-in-from-top-5`}>
                     <div className="flex flex-col space-y-6 px-10">
-                        {navItems.map((item) => (
+                        {items.map((item) => (
                             <button
-                                key={item}
-                                onClick={() => scrollToSection(item.toLowerCase())}
+                                key={item.id}
+                                onClick={() => scrollToSection(item.id)}
                                 className={`text-left text-sm uppercase tracking-[0.25em] font-extrabold transition-all duration-300
                                     ${scrolled
                                         ? 'text-wed-green-darker hover:text-wed-green'
                                         : 'text-wed-accent-light hover:text-white drop-shadow-md'}
                                 `}
                             >
-                                {item}
+                                {item.label}
                             </button>
                         ))}
                     </div>

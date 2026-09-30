@@ -92,7 +92,7 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
                                                 Wiktoria & Bartek
                                             </h1>
                                             <p className="text-white/70 text-xs uppercase tracking-[0.2em]">
-                                                Wedding 2026
+                                                02.10.2026
                                             </p>
                                         </div>
 
@@ -109,7 +109,8 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
                                                         value={password}
                                                         onChange={(e) => setPassword(e.target.value)}
                                                         className="flex-1 bg-transparent border-none outline-none text-white placeholder-white/40 text-sm font-medium tracking-wide"
-                                                        placeholder="Enter access code..."
+                                                        placeholder="Wpisz hasło..."
+                                                        aria-label="Hasło"
                                                         autoFocus
                                                     />
                                                     <button
@@ -127,7 +128,7 @@ export function PasswordGateway({ children }: PasswordGatewayProps) {
                                                     animate={{ opacity: 1, height: "auto" }}
                                                     className="text-red-300 text-xs text-center font-medium bg-red-900/20 py-1 rounded-lg"
                                                 >
-                                                    Incorrect password
+                                                    Niepoprawne hasło
                                                 </motion.p>
                                             )}
                                         </form>

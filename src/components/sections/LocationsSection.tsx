@@ -30,10 +30,10 @@ export const LocationsSection = () => {
     ];
 
     return (
-        <section id="lokalizacje" className="pt-8 pb-24 md:pt-12 md:pb-36 relative min-h-[calc(100svh-68px)] flex flex-col justify-center">
+        <section id="lokalizacje" className="py-16 md:py-24 relative scroll-mt-[68px]">
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <SectionTitle>Kluczowe Miejsca</SectionTitle>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {locations.map((loc, idx) => (
                         <div key={idx} className="glass-card rounded-[3rem] overflow-hidden hover:shadow-2xl transition-all duration-700 group flex flex-col border-wed-green-light/20">
                             <div className="h-[320px] overflow-hidden relative">
