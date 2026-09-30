@@ -101,7 +101,6 @@ export const SEATING: [name: string, table: number][] = [
     ["Lotycz Stanisław", 14],
     ["Ładoś Remigiusz", 0],
     ["Łagód Eliza", 3],
-    ["Łagód Elżbieta", 14],
     ["Łasocha Agnieszka", 9],
     ["Łasocha Henryk", 16],
     ["Łasocha Kacper", 9],
